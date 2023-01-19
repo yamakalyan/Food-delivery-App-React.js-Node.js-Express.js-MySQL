@@ -28,7 +28,7 @@ const Login =()=>{
     return(
         <>
         <Navbar/>
-        <div className="container p-3 mt-4 bg-dark text-light">
+        <div className="container p-3 mt-4 bg-dark shadow">
             <div className="row">
                 <div className="col-md-4 mb-2">
                     <img className="img-fluid" src="/login.png" alt="" />

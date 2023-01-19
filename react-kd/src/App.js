@@ -5,12 +5,14 @@ import About from './trials/About.js'
 import Contact from './trials/Contact.js';
 import Login from './trials/Login.js';
 import Register from './trials/Register.js';
+import Product from './trials/Products.js';
 
 const App=()=> {
   return (
     <>
     <BrowserRouter>
     <Routes>
+      <Route path='/Product' element={<Product/>}></Route>
       <Route path='/Home' element={<Home/>}></Route>
       <Route path='/About' element={<About/>}></Route>
       <Route path='/Contact' element={<Contact/>}></Route>
