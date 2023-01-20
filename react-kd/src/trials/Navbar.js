@@ -6,7 +6,7 @@ const Navbar =()=>{
         <>
         <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-        <Link className="navbar-brand pl-5" to="/Home">KD</Link>
+        <Link className="navbar-brand pl-5" to="/Home ">KD</Link>
         <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav">
         <li className="nav-item">

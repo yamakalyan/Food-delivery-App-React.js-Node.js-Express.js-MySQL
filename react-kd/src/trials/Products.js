@@ -6,7 +6,7 @@ const Product =()=>{
     return(
         <>
         <Navbar/>
-        <div className="box">
+        <div className="box ">
             heyy deviii
         </div>
         </>

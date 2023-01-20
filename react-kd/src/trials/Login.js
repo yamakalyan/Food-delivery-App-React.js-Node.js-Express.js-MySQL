@@ -45,10 +45,10 @@ const Login =()=>{
         </div>
         <div className="row">
             <div className="col">
-               <small>New Account ? <Link to='/Register'>Register</Link></small> 
+        <small>New Account ? <Link to='/Register'>Register</Link></small> 
             </div>
             <div className="col mb-4">
-          <small><Link to="/forgetpasword">Forget Password ?</Link></small>
+        <small><Link to="/forgetpasword">Forget Password ?</Link></small>
             </div>
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>

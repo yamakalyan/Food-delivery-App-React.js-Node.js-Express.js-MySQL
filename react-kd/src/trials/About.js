@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
 
-const Home = () => {
+const About = () => {
   return (
     <>
     <Navbar/>
@@ -13,7 +13,7 @@ const Home = () => {
         <small>Designed by myself</small>
         </div>
         <div className="col-md-6 p-3">
-        <p>This is an shopping app. </p>
+        <p>This is an shopping app.</p>
         <h5> Tech used in this project. </h5><hr />
           <b>HTML</b><br />
           <b>CSS</b><br />
@@ -29,4 +29,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default About;

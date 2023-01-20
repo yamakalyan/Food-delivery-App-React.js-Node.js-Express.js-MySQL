@@ -6,7 +6,7 @@ const Contact = () => {
   return (
     <>
       <Navbar />
-      <div className="container">
+      <div className="container ">
         <section className="mb-4 m-5">
           <h2 className="h1-responsive font-weight-bold text-center my-4">
             Contact us

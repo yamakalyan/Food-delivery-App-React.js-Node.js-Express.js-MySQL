@@ -48,7 +48,9 @@ const Register = () => {
                 </div>
             <div className="col-md-6 mb-2 p-5 my-auto shadow bg-dark text-light rounded-lg">
                 <div className="text-center mb-2 m">
+
                     <h5><b>Register</b></h5><hr />
+
         <form action="/action_page.php" onSubmit={saveInputValues}>
         <div className="form-group">
         <input type="name" className="form-control bg-dark text-light" onChange={nameInput} id="name" placeholder="Enter UserName"/>
