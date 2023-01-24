@@ -1,11 +1,11 @@
 import React from 'react';
-import Navbar from './Navbar';
+import Header from './Header';
 
 const About = () => {
   return (
     <>
-    <Navbar/>
-    <div className="container mt-3 p-3">
+    <Header/>
+    <div className="container mt-3 p-3 ">
       <div className="row p-2">
         <div className="col-md-6 p-3 text-center shadow">
           <img className='img-fluid' src="/selfdp.png" alt="" />

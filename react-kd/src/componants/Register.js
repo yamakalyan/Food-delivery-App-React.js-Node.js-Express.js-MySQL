@@ -71,7 +71,7 @@ const Register = () => {
           <div className="col">
           </div>
         </div>
-        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="submit" className="btn btn-success btn-lg btn-block">Sign-Up</button>
         </form>
         </div>
             </div>

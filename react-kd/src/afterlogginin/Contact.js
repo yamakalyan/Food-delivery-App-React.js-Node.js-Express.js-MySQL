@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbar from "./Navbar";
+import Header from "./Header";
 
 const Contact = () => {
   return (
     <>
-      <Navbar />
+      <Header />
       <div className="container ">
         <section className="mb-4 m-5">
           <h2 className="h1-responsive font-weight-bold text-center my-4">
@@ -108,7 +108,8 @@ const Contact = () => {
           </div>
         </section>
       </div>
-    </>
+      </>
+    
   );
 };
 
