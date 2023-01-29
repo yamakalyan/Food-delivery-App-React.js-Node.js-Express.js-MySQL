@@ -29,9 +29,6 @@ const Contact = () => {
                         name="name"
                         className="form-control"
                       />
-                      <label for="name" className="">
-                        Your name
-                      </label>
                     </div>
                   </div>
 
@@ -43,9 +40,6 @@ const Contact = () => {
                         name="email"
                         className="form-control"
                       />
-                      <label for="email" className="">
-                        Your email
-                      </label>
                     </div>
                   </div>
                 </div>
@@ -59,9 +53,7 @@ const Contact = () => {
                         name="subject"
                         className="form-control"
                       />
-                      <label for="subject" className="">
-                        Subject
-                      </label>
+                     
                     </div>
                   </div>
                 </div>
@@ -76,31 +68,27 @@ const Contact = () => {
                         rows="2"
                         className="form-control md-textarea"
                       ></textarea>
-                      <label for="message">Your message</label>
                     </div>
                   </div>
                 </div>
               </form>
 
               <div className="text-center text-md-left">
-                <Link className="btn btn-primary">Send</Link>
+                <Link className="btn btn-primary" to='/'>Send</Link>
               </div>
             </div>
 
             <div className="col-md-3 text-center">
               <ul className="list-unstyled mb-0">
                 <li>
-                  <i className="fas fa-map-marker-alt fa-2x"></i>
                   <p>Hyderabad, Himayath Nagar, 500029</p>
                 </li>
 
                 <li>
-                  <i className="fas fa-phone mt-4 fa-2x"></i>
                   <p>+91 955 004 9382</p>
                 </li>
 
                 <li>
-                  <i className="fas fa-envelope mt-4 fa-2x"></i>
                   <p>yamakalyan6@.com</p>
                 </li>
               </ul>

@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CiBrightnessUp } from 'react-icons/ci';
 
-const Header =()=>{
+
+const Header =(props)=>{
+
+    
    
     return(
+
         <>
-        <nav className="navbar navbar-expand-lg border-bottom border-dark navbar-primary">
+        <nav className={`navbar navbar-expand-lg border-bottom border-${props.border}
+         navbar-${props.mode} bg-${props.mode}`}>
         <div className="container-fluid">
     
-        <Link className="navbar-brand pl-5 font-weight-bold" to="/">
+        <Link className="navbar-brand pl-5 font-weight-bold" to="/Userhome">
         <img src="/20.jpg" width="40" height="40" className="d-inline-block align-top mr-3 rounded-circle" alt=""/>
          K D</Link>
             <div className="collapse navbar-collapse">
@@ -22,11 +26,12 @@ const Header =()=>{
     </ul>
     </div>
     <div className="nav navbar-nav">
-        <button className="btn btn-light rounded" ><CiBrightnessUp /></button>
+        <button className="btn btn-light rounded" onClick={props.changeBg} >{props.btn}</button>
     </div>
         </div>
         </nav>
         </>
+
 )
 }
 export default Header;
