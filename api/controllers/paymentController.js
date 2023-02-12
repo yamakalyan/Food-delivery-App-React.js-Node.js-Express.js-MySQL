@@ -117,6 +117,7 @@ payments.get("/details/:payment_id", (req, res)=>{
                     })
                 }
                 else{
+                    
                    var takingPaymentdetails = paymentResult[0].order_id;
 
                    const ordersQuerry = `SELECT * FROM user_orders WHERE order_id = '${takingPaymentdetails}'`;

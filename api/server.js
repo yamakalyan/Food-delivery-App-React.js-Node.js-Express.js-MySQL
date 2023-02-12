@@ -17,7 +17,7 @@ app.use("/user/", creatingconnections);
 
 app.use("/food/", foodReg);
 
-app.use("/orders/", orders);
+app.use("/order/", orders);
 
 app.use("/address/", address);
 

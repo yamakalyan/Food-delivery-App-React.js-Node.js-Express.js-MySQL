@@ -20,42 +20,6 @@ orders.get("/", (req, res)=>{
     }
 });
 
-// searching food item by using routing method
-orders.get("/search/:food_id/", (req, res)=>{
-    try {
-        const id = req.params.food_id;
-
-        const checkingSql = `SELECT * FROM food_items WHERE food_id = '${id}'`;
-
-        db.query(checkingSql, (error, results)=>{
-            if (error) {
-                res.json({
-                    message : "item not found",
-                    error
-                })
-            } else {
-              if(results.length === 0){
-                res.json({
-                    server : false,
-                    message : "item not found",
-                })
-              }
-              else{
-                res.json({
-                    server : true,
-                    results
-                })
-              }
-            }
-        })
-    } catch (error) {
-        res.json({
-            message : "invalid id",
-            error
-        })
-    }
-});
-
 // to create order for user
 orders.post("/create/", (req, res)=>{
     try {
@@ -93,7 +57,7 @@ orders.post("/create/", (req, res)=>{
     }
 });
 
-// adding user_id automatically when we order food
+// not important just tried// adding user_id automatically when we order food
 orders.post("/create/:user_id/",(req, res)=>{
     try {
         const orderId = Math.floor(10000000 + Math.random() *9999999);
@@ -146,7 +110,7 @@ orders.post("/create/:user_id/",(req, res)=>{
 });
 
 // to get user details, food details, by order id
-orders.get("/userdetails/:order_id/", (req, res)=>{
+orders.get("/orderdetails/:order_id/", (req, res)=>{
     try {
         const searchingOrder = req.params.order_id;
 
@@ -200,46 +164,31 @@ orders.get("/userdetails/:order_id/", (req, res)=>{
 
 // getting user ordered food items
 
-orders.get("/userorders/:user_id/", (req, res)=>{
+orders.get("/orderlist/:user_id", (req, res)=>{
     try {
-        const userid = req.params.user_id;
+        const userId = req.params.user_id;
 
-        const gettingSql = `SELECT * FROM user_orders WHERE user_id = '${userid}'`;
+        let listQuerrysql = `SELECT * FROM user_orders WHERE user_id = '${userId}'`;
 
-        db.query(gettingSql, (err, orderResults)=>{
+        db.query(listQuerrysql, (err, results)=>{
             if (err) {
                 res.json({
-                    message : "orders not found",
+                    message : "user orders not found",
                     err
                 })
             } else {
-
-             var obj = orderResults[2].food_id
-
-                const foodSql = `SELECT * FROM food_items WHERE food_id = '${obj}'`;
-
-                db.query(foodSql, (error, foodResults)=>{
-                    if (error) {
-                        res.json({
-                            message : "orders found but fetching food details failed",
-                            error
-                        })
-                    } else {
-                      res.json({
-                        orderResults,
-                        foodResults
-                      })
-                    }
+                res.json({
+                    results
                 })
             }
         })
     } catch (error) {
         res.json({
-            message : "invalid user details",
+            message : "invalid user id",
             error
         })
     }
-});
+})
 
 // update for user previous orders
 orders.put("/update/:order_id/", (req, res)=>{
