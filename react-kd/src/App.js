@@ -14,28 +14,23 @@ import Italian from './food lists/Italian.jsx';
 
 import Search from './componants/Searchbar.js';
 import Cart from './afterlogginin/Cart.js';
-import Logout from './afterlogginin/Logout.js';
 import Userhome from './afterlogginin/Userhome.js';
 import About from './afterlogginin/About.js';
 import Contact from './afterlogginin/Contact.js';
 import Orders from './afterlogginin/Orders.js';
 import Item from './componants/item.js';
 
-
 const App=()=> {
 
-const loggedIn = true;
-
+  const loggedIn = false;
   return (
     <>
-
     {loggedIn ?
     
     <BrowserRouter>
     <Routes>
-      <Route path='/' element={<Userhome/>}></Route>
+      <Route path='/' element={<Userhome />}></Route>
       <Route path='/Catagory' element={<Catagory/>}></Route>
-      <Route path='/Logout'element={<Logout />}></Route>
       <Route path='/Orders'element={<Orders />}></Route>
       <Route path='/Cart'element={<Cart />}></Route>
       <Route path='/About'element={<About />}></Route>
@@ -46,7 +41,7 @@ const loggedIn = true;
       <Route path='/Bakery'element={<Bakery />}></Route>
       <Route path='/Chinese'element={<Chinese />}></Route>
       <Route path='/Boiled'element={<Boiled />}></Route>
-      <Route path='/Italian'element={<Italian />}></Route>
+      <Route path='/Italian' element={<Italian />}></Route>
     </Routes>
     </BrowserRouter>
   :

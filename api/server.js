@@ -1,25 +1,30 @@
 const express = require('express');
-const creatingconnections = require("./controllers/userController");
-const foodReg = require("./controllers/foodController");
-const orders = require("./controllers/ordersController");
-const address = require("./controllers/addressController");
-const payments = require("./controllers/paymentController")
+const env = require("dotenv");
+const cors = require('cors')
+
+const userController = require("./controllers/userController");
+const foodController = require("./controllers/foodController");
+const ordersController = require("./controllers/ordersController");
+const addressController = require("./controllers/addressController");
+const paymentsController = require("./controllers/paymentController");
+
 const app = express();
 
+env.config();
 
-app.listen(3120, ()=>{
+app.listen(process.env.PORT, ()=>{
     console.log("server working at 3120")
 })
 
+app.use(cors({
+    origin : '*'
+}))
+
 app.use(express.json());
 
-app.use("/user/", creatingconnections);
-
-app.use("/food/", foodReg);
-
-app.use("/order/", orders);
-
-app.use("/address/", address);
-
-app.use("/payment/", payments)
+app.use("/user/", userController);
+app.use("/food/", foodController);
+app.use("/order/", ordersController);
+app.use("/address/", addressController);
+app.use("/payment/", paymentsController)
 

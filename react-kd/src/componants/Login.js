@@ -3,27 +3,38 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 
 const Login =()=>{
+    const [userLogin, setUserlogin] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const [mail, setmail] = useState("");
-    const [pass, setpass] = useState("");
-
-    const saveValue = (event)=>{
-
-        setmail(event.target.value);
+    const emailInput=(e)=>{
+        setEmail(e.target.value)
+    }
+    const passwordInput =(e)=>{
+        setPassword(e.target.value)
     }
 
-    const savePass =(event)=>{
-        setpass(event.target.value);
-    }
+    const loginUserSubmit =(e)=>{
+        e.preventDefault();
 
-    const submitData=(event)=>{
-        event.preventDefault();
-
-        let newUser = {
-            username : mail,
-            password : pass
+        let loginUser = {
+            username : email,
+            userpassword : password 
         }
-        console.log(newUser)
+
+        const options = {
+            method : 'POST',
+            headers : {'content-type' : 'application/json'},
+            body : JSON.stringify(loginUser)
+        }
+
+        fetch('http://localhost:3120/user/login/', options)
+        .then(response => response.json())
+        .then(data => 
+            {setUserlogin(data.server);
+                console.log(data.token)
+            }
+        )
     }
     return(
         <>
@@ -36,13 +47,14 @@ const Login =()=>{
             <div className="col-md-6 mb-2 p-5 rounded my-auto shadow bg-dark text-light">
                 <div className="text-center mb-2 m">
                     <h5><b>Login</b></h5><hr />
-        <form action="/action_page.php" onSubmit={submitData}>
+                    <p>{userLogin}</p>
+        <form action="/action_page.php" onSubmit={loginUserSubmit}>
         <div className="form-group">
-        <input type="email" className="form-control bg-dark" id="email" onChange={saveValue} placeholder="Enter username/@gmail.com"/>
+        <input type="email" className="form-control bg-dark" onChange={emailInput} id="email" placeholder="Enter username/@gmail.com"/>
         </div>
         
         <div className="form-group">
-        <input type="password" className="form-control bg-dark" id="pwd" onChange={savePass} placeholder="Enter password"/>
+        <input type="password" className="form-control bg-dark" id="pwd" onChange={passwordInput} placeholder="Enter password"/>
         </div>
         <div className="row">
             <div className="col">

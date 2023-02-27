@@ -1,16 +1,15 @@
 const express = require("express");
-
+const jwl = require("jsonwebtoken");
 const database = require("../configures/database")
-
 const payments = express.Router();
 
 // home page of payments
 payments.get("/", (req, res)=>{
     try {
-        res.send("succesfully payment working")
+        res.status(200).send("succesfully payment working")
         
     } catch (error) {
-        res.send("failed to connect payments")
+        res.status(500).send("failed to connect payments")
     }
 });
 
@@ -25,25 +24,43 @@ payments.post("/create/", (req, res)=>{
         const paymentStatus = req.body.payment_status;
         const paymentIffailed = req.body.payment_iffailed;
 
+        var securekeyhead = process.env.JWT_HEADER_KEY;
+        var securekey = process.env.JWT_SECRET_KEY;
+
+        var headerKeymaking = req.header(securekeyhead);
+
+        const tokenVerifying = jwl.verify(headerKeymaking, securekey);
+
+        if (tokenVerifying) {
+
         var paymentsql = `INSERT INTO payments(payment_id,user_id,order_id,payment_details,total_amount,payment_status,payment_iffailed)
                     VALUES('${paymentId}','${userId}','${orderId}','${paymentDetails}','${totalAmount}','${paymentStatus}','${paymentIffailed}')`;
 
             database.query(paymentsql, (err, results)=>{
                 if (err) {
-                    res.json({
+                    res.status(400).json({
+                        server : false,
                         message : "failed to create payment",
                         err
                     })
                 } else {
-                    res.json({
+                    res.status(200).json({
+                        server : true,
                         message : "payment succesfully created",
                         results
                     })
                 }
             })
+        } else {
+            res.status(400).json({
+                server : false,
+              msg : "failed to create a payment"
+            })  
+          }
 
     } catch (error) {
-        res.json({
+        res.status(500).json({
+            server : false,
             message : "invalid details",
             error
         })
@@ -59,14 +76,16 @@ payments.delete("/delete/:payment_id", (req, res)=>{
 
         database.query(sql, (error, results)=>{
             if (error) {
-                res.json({
+                res.status(400).json({
+                    server: false,
                     message : "payment failed to delete",
                     error
                 })
             } else {
             
                 if(results.length === 0){
-                    res.json({
+                    res.status(400).json({
+                        server : false,
                         message : "payment not found",
                     
                     })
@@ -76,12 +95,14 @@ payments.delete("/delete/:payment_id", (req, res)=>{
 
                     database.query(deleteSql, (err, results)=>{
                         if (err) {
-                            res.json({
+                            res.status(400).json({
+                                server : false,
                                 message : "payment not deleted",
                                 err
                             })
                         } else {
-                            res.json({
+                            res.status(200).json({
+                                server : true,
                                 message : "payment deleted succesfully"
                             })
                         }
@@ -90,14 +111,15 @@ payments.delete("/delete/:payment_id", (req, res)=>{
             }
         })
     } catch (error) {
-        res.json({
+        res.status(500).json({
+            server : false,
             message : "invalid details entered",
             error 
         })
     }
 });
 
-// searching payment/order details/food details/address/user details
+// getting payment details like order details/food details/address details/user details
 payments.get("/details/:payment_id", (req, res)=>{
     try {
         const paymentId = req.params.payment_id
@@ -106,13 +128,15 @@ payments.get("/details/:payment_id", (req, res)=>{
 
         database.query(checkingQuerry, (error, paymentResult)=>{
             if (error) {
-                res.json({
+                res.status(400).json({
+                    server : false,
                     message : "payment not found",
                     error
                 })
             } else {
                 if(paymentResult.length === 0){
-                    res.json({
+                    res.status(400).json({
+                        server : false,
                         message : "not found"
                     })
                 }
@@ -124,13 +148,15 @@ payments.get("/details/:payment_id", (req, res)=>{
 
                    database.query(ordersQuerry, (err, orderResults)=>{
                     if (err) {
-                        res.json({
+                        res.status(400).json({
+                            server : false,
                             message : "payment order didnt found",
                             err
                         })
                     } else {
                         if(orderResults.length === 0){
-                            res.json({
+                            res.status(400).json({
+                                server : false,
                                 message : "payment found but order details not found"
                             })
                         }
@@ -143,13 +169,15 @@ payments.get("/details/:payment_id", (req, res)=>{
                             const foodQuerry = `SELECT * FROM food_items WHERE food_id = '${takingOrderdetails}'`;
                             database.query(foodQuerry, (err, foodResults)=>{
                                 if (err) {
-                                    res.json({
+                                    res.status(400).json({
+                                        server : false,
                                         message : "food item not found",
                                         err
                                     })
                                 } else {
                                     if(foodResults.length === 0){
-                                        res.json({
+                                        res.status(400).json({
+                                            server : false,
                                             message : "order found but food details not found"
                                         })
                                     }
@@ -157,13 +185,15 @@ payments.get("/details/:payment_id", (req, res)=>{
                                         const addressQuerry = `SELECT * FROM users_address WHERE address_id = '${takingaddressdetails}'`;
                                         database.query(addressQuerry, (err, addressResults)=>{
                                             if (err) {
-                                                res.json({
+                                                res.status(400).json({
+                                                    server : false,
                                                     message : "address not found",
                                                     err
                                                 })
                                             } else {
                                                 if(addressResults.length === 0){
-                                                    res.json({
+                                                    res.status(400).json({
+                                                        server : false,
                                                         message : "food found but address details not found"
                                                     })
                                                 }
@@ -171,18 +201,21 @@ payments.get("/details/:payment_id", (req, res)=>{
                                                     const userQuerry = `SELECT * FROM users_data WHERE user_id = '${takingUserdetails}'`;
                                                     database.query(userQuerry, (err, userResults)=>{
                                                         if (err) {
-                                                            res.json({
+                                                            res.status(400).json({
+                                                                server : false,
                                                                 message : "user not found",
                                                                 err
                                                             })
                                                         } else {
                                                             if(userResults.length === 0){
-                                                                res.json({
+                                                                res.status(400).json({
+                                                                    server : false,
                                                                     message : "address found but user details not found"
                                                                 })
                                                             }
                                                             else{
-                                                                res.json({
+                                                                res.status(200).json({
+                                                                    server : true,
                                                                     message : "Payment Details Found Succesfully",
                                                                     paymentResult,
                                                                     orderResults,
@@ -209,7 +242,8 @@ payments.get("/details/:payment_id", (req, res)=>{
             }
         })
     } catch (error) {
-        res.json({
+        res.status(500).json({
+            server : false,
             message : "invalid details",
             error
         })
