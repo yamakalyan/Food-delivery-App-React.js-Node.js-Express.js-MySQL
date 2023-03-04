@@ -3,11 +3,12 @@ import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
+  // const navigator = useNavigate();
   const [name, setname] = useState("");
   const [number, setnumber] = useState("");
   const [mail, setmail] = useState("");
-  const [passwod, setpassword] = useState("");
-  const [registerUser, setRegisteruser] = useState(false);
+  const [password, setpassword] = useState("");
+  const [registerUser, setRegisteruser] = useState('');
   const [msg, setMsg] = useState('');
 
   const nameInput = (event)=>{
@@ -35,7 +36,7 @@ const Register = () => {
       user_name : name,
       user_mobile : number,
       user_email : mail,
-      user_password : passwod
+      user_password : password
     }
     
     const options = {
@@ -47,8 +48,14 @@ const Register = () => {
     fetch('http://localhost:3120/user/register/', options)
     .then(response =>response.json())
     .then(data => {
-      setRegisteruser(data.server);
-      setMsg(data.message)
+      if (data.server === true) {
+        setRegisteruser(data.results);
+        setMsg(data.message) 
+        // navigator('/Login')
+      } else {   
+        setRegisteruser(data.results);
+        setMsg(data.message)
+      }
       console.log(data.results)})
   }
 
@@ -63,15 +70,14 @@ const Register = () => {
             <div className="col-md-6 mb-2 p-5 my-auto shadow bg-dark text-light rounded-lg">
                 <div className="text-center mb-2 m">
                     <h5><b>Register</b></h5><hr />
-
                     {registerUser ? 
-                    <div className="alert alert-success" role="alert">
-                    {msg}
-                  </div>
+                 
+                 <>{msg}</>  
+
                     :
-                    <div className="alert alert-danger" role="alert">
-                   {msg}
-                  </div>}
+                    <>{msg}</>
+                  
+                  }
                     
         <form onSubmit={saveInputValues}>
         <div className="form-group">

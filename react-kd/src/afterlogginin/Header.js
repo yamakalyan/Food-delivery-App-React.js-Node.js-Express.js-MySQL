@@ -1,23 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useState } from 'react';
+
 
 
 const Header =()=>{
 
 const [bgcolor, setbgcolor] = useState('light');
-const [textColor, settextColor] = useState('dark')
 const [btn, setbtn] = useState('DArkMode')
 
-const changeBgColor =(e)=>{
+const changeBgColor =()=>{
    if (bgcolor === 'light') {
     setbgcolor("dark");
-    settextColor('dark')
     setbtn('LightMode')
     document.body.style.backgroundColor = 'black';
     document.body.style.color = 'white';
    } else {
     setbgcolor("light");
-    settextColor('light')
     setbtn('DarkMode')
     document.body.style.backgroundColor = 'white';
     document.body.style.color = 'black';
@@ -28,7 +27,7 @@ const changeBgColor =(e)=>{
     return(
         <>
         <nav className={`navbar navbar-expand-lg border-bottom border-dark
-         navbar-${textColor} bg-${bgcolor}`}>
+         navbar-${bgcolor} bg-${bgcolor}`}>
         <div className="container-fluid">    
         <Link className="navbar-brand pl-5 font-weight-bold" to="/">
         <img src="/20.jpg" width="40" height="40" className="d-inline-block align-top mr-3 rounded-circle" alt=""/>

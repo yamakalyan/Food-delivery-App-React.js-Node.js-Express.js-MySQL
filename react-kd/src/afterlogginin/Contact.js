@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Header from "./Header";
 
 const Contact = () => {
@@ -17,83 +16,29 @@ const Contact = () => {
             help you.
           </p>
 
-          <div className="row">
-            <div className="col-md-9 mb-md-0 mb-5">
-              <form>
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="md-form mb-0">
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        className="form-control"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-md-12">
-                    <div className="md-form mb-0">
-                      <input
-                        type="text"
-                        id="email"
-                        name="email"
-                        className="form-control"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="md-form mb-0">
-                      <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        className="form-control"
-                      />
-                     
-                    </div>
-                  </div>
-                </div>
-
-                <div className="row">
-                  <div className="col-md-12">
-                    <div className="md-form">
-                      <textarea
-                        type="text"
-                        id="message"
-                        name="message"
-                        rows="2"
-                        className="form-control md-textarea"
-                      ></textarea>
-                    </div>
-                  </div>
-                </div>
-              </form>
-
-              <div className="text-center text-md-left">
-                <Link className="btn btn-primary" to='/'>Send</Link>
-              </div>
+          {/* first name and second name */}
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">First and last name</span>
             </div>
-
-            <div className="col-md-3 text-center">
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <p>Hyderabad, Himayath Nagar, 500029</p>
-                </li>
-
-                <li>
-                  <p>+91 955 004 9382</p>
-                </li>
-
-                <li>
-                  <p>yamakalyan6@.com</p>
-                </li>
-              </ul>
+            <input type="text" aria-label="First name" class="form-control"/>
+            <input type="text" aria-label="Last name" class="form-control"/>
+          </div> <br/>
+          {/* username input */}
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">@</span>
             </div>
+            <input type="text" class="form-control" placeholder="@email" aria-label="@email" aria-describedby="basic-addon1"/>
           </div>
+        {/* text area */}
+                  <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">With textarea</span>
+          </div>
+          <textarea class="form-control" aria-label="With textarea"></textarea>
+        </div> <br/>
+        <button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
         </section>
       </div>
       </>

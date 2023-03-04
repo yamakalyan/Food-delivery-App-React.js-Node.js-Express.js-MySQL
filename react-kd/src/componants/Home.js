@@ -7,14 +7,10 @@ const Home =()=>{
     
   return(
     <>
-    <Navbar />
-    <div className="container-fluid text-light">
-      <div className="position-absolute">
-      <img className="img-fuild" src="/bgfood.png" height='100%' width='100%' alt=""/>
-      </div>
-      <div className="container-fluid position-relative">
+    <Navbar about={'#AboutUs'} />
+      <div className="container-fluid m-1 bg-dark">
         <div className="row">
-          <div className="col-6 m-auto">
+          <div className="col-6 m-auto text-dark">
         <img className="img-responsive" src="/kdlogo.png" height='100%' width='700px' alt="" />
           </div>
           <div className="col-2 m-5 bg-light shadow">
@@ -38,31 +34,42 @@ const Home =()=>{
         </div>
           </div>
           </div>
+      <div className="container-fluid m-1 bg-light text-dark">
+        <div className="row">
+          <div className="col-6 text-center">
+        <img className="img-fluid" src="/50.png"  alt=""/>
+          </div>
+          <div className="col-6">
+        <img className="img-fluid mt-3" src="/newbg.png"  alt=""/>
+          </div>
+        </div>
       </div>
-      <div className="container">  
-      <div className="row">
-        <div className="col-3 m-3" >
-          <img src="/14.jpg" className="img-thumbnail p-3" alt="" />
-        </div>
-        <div className="col-3 m-3" >
-          <img src="/14.jpg" className="img-thumbnail p-3" alt="" />
-        </div>
-        <div className="col-3 m-3" >
-          <img src="/14.jpg" className="img-thumbnail p-3" alt="" />
-        </div>
-          <div className="col mt-3 text-light">
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro repellat architecto modi, dignissimos perspiciatis, culpa, recusandae magnam asperiores rerum voluptates odio molestias eum labore. Fugiat adipisci accusamus quisquam quibusdam neque.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum deleniti veritatis provident quis sint impedit nam facilis quos exercitationem asperiores voluptatibus cumque ipsum est totam, aliquid praesentium error sit non.
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis tempora praesentium ipsam sed impedit, ullam necessitatibus? Vitae aliquam laudantium numquam corporis suscipit, voluptates soluta voluptatibus recusandae vero ipsam voluptatum voluptate.
-            lorem
-          </p>
-          </div>
-          <div className="col-6">
-            <img src="/15.jpg" alt="" />
-          </div>
-          <div className="col-6">
-            <img src="/16.jpg" alt="" />
-          </div>
+      <div className="container shadow mt-5">
+        <h2 className="text-center">Write to Us</h2><hr/>
+
+      <div id="AboutUs" className="text-center p-5 m-5"> 
+
+      <div class="input-group mb-3">
+      <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">Name</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"/>
+      </div>
+
+      <div class="input-group mb-3">
+      <div class="input-group-prepend">
+      <span class="input-group-text" id="basic-addon1">@gmail</span>
+      </div>
+      <input type="text" class="form-control" placeholder="Useremail" aria-label="Useremail" aria-describedby="basic-addon1"/>
+      </div>
+
+      <div class="input-group">
+      <div class="input-group-prepend">
+      <span class="input-group-text">With textarea</span>
+      </div>
+      <textarea class="form-control" aria-label="With textarea"></textarea>
+      </div>
+
       </div>
       </div>
     </>

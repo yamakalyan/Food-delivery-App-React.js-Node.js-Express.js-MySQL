@@ -50,11 +50,11 @@ const Login =()=>{
                     <p>{userLogin}</p>
         <form action="/action_page.php" onSubmit={loginUserSubmit}>
         <div className="form-group">
-        <input type="email" className="form-control bg-dark" onChange={emailInput} id="email" placeholder="Enter username/@gmail.com"/>
+        <input type="email" className="form-control bg-dark text-light" onChange={emailInput} id="email" placeholder="Enter username/@gmail.com"/>
         </div>
         
         <div className="form-group">
-        <input type="password" className="form-control bg-dark" id="pwd" onChange={passwordInput} placeholder="Enter password"/>
+        <input type="password" className="form-control bg-dark text-light" id="pwd" onChange={passwordInput} placeholder="Enter password"/>
         </div>
         <div className="row">
             <div className="col">

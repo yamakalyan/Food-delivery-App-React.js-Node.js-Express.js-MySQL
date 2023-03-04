@@ -25,7 +25,7 @@ orders.get("/", (req, res)=>{
 orders.get("/list/", (req, res)=>{
     try {
         
-    const sql = `SELECT * FROM user_orders`;
+    const sql = `SELECT * FROM user_orders WHERE order_ifdeleted ='0'`;
 
     database.query(sql, (err, results)=>{
         if (err) {
@@ -116,7 +116,7 @@ orders.get("/orderdetails/:order_id/", (req, res)=>{
     try {
         const searchingOrder = req.params.order_id;
 
-        const orderSql = `SELECT * FROM user_orders WHERE order_id = '${searchingOrder}'`;
+        const orderSql = `SELECT * FROM user_orders WHERE order_id = '${searchingOrder}' AND order_ifdeleted ='0'`;
 
         db.query(orderSql, (error, orderResults)=>{
             if (error) {
@@ -177,7 +177,7 @@ orders.get("/orderlist/:user_id", (req, res)=>{
     try {
         const userId = req.params.user_id;
 
-        let listQuerrysql = `SELECT * FROM user_orders WHERE user_id = '${userId}'`;
+        let listQuerrysql = `SELECT * FROM user_orders WHERE user_id = '${userId}' AND order_ifdeleted ='0'`;
 
         db.query(listQuerrysql, (err, results)=>{
             if (err) {
@@ -203,10 +203,10 @@ orders.get("/orderlist/:user_id", (req, res)=>{
     }
 })
 
-// update for user previous orders
-orders.put("/update/:order_id/", (req, res)=>{
+// update for user orders
+orders.put("/update/:user_id", (req, res)=>{
     try {
-        const id = req.params.order_id;
+        const id = req.params.user_id;
         const orderQuantity = req.body.order_quantity;
         const foodId = req.body.food_id;
         const addressId = req.body.address_id;
@@ -289,7 +289,7 @@ orders.delete("/delete/:order_id/", (req, res)=>{
     try {
         const id = req.params.order_id;
 
-        const checkingSql = `SELECT * FROM user_orders WHERE order_id = '${id}'`;
+        const checkingSql = `SELECT * FROM user_orders WHERE order_id = '${id}' AND order_ifdeleted ='0'`;
 
         db.query(checkingSql, (error, results)=>{
             if (error) {
@@ -306,7 +306,7 @@ orders.delete("/delete/:order_id/", (req, res)=>{
                     })
                 }
                 else{
-                    const deleteSql = `DELETE FROM user_orders WHERE order_id = '${id}'`;
+                    const deleteSql = `UPDATE user_orders SET order_ifdeleted ='1' WHERE order_id = '${id}' AND order_ifdeleted ='0'`;
 
                     db.query(deleteSql, (error, results)=>{
                         if (error) {
@@ -340,7 +340,7 @@ orders.get("/userorders/:user_id/", (req, res)=>{
     try {
         let id = req.params.user_id;
 
-        let sql = `SELECT * FROM user_orders WHERE user_id = '${id}' `;
+        let sql = `SELECT * FROM user_orders WHERE user_id = '${id}' AND order_ifdeleted ='0' `;
 
         db.query(sql,(err, orderResults)=>{
             if (err) {

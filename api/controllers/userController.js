@@ -92,7 +92,7 @@ router.get("/:user_id/", (req, res)=>{
     
 });
 
-// registering user
+// registering user (=== for check and == in node when using node consontrate on =)
 router.post("/register/", (req, res)=>{ 
     try {
 
@@ -104,7 +104,7 @@ router.post("/register/", (req, res)=>{
         const statusUser = req.body.user_status;
         const ifdeletedUser = req.body.user_deleted;
     
-        const conditionalSqlquery = `SELECT * FROM users_data WHERE user_mobile='${mobileUser}' AND user_email='${emailUser}' AND user_ifdeleted='0'`;
+        const conditionalSqlquery = `SELECT * FROM users_data WHERE user_mobile ='${mobileUser}' AND user_email='${emailUser}' AND user_ifdeleted = '0'`;
         
         database.query(conditionalSqlquery, (err, existingResults)=>{
             if (err) {
@@ -114,7 +114,7 @@ router.post("/register/", (req, res)=>{
                     err
                 })
             } else {
-                if (existingResults == 0) {
+                if (existingResults === 0) {
 
                     const regSql = `INSERT INTO users_data(user_id, user_name, user_mobile, user_email, user_password, user_status, user_ifdeleted) VALUES ('${id}', '${nameUser}', '${mobileUser}', '${emailUser}', '${passwordUser}', '${statusUser}', '${ifdeletedUser}')`;
         
@@ -230,7 +230,6 @@ router.put("/update/", (req, res)=>{
         })
     }
 });
-
 
 // deleting user details
 router.delete("/delete/:userId", (req, res)=>{

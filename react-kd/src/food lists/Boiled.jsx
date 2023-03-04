@@ -1,12 +1,12 @@
 import React from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import Header from '../afterlogginin/Header';
+import Navbar from '../componants/Navbar';
 
 function Boiled() {
   return (
     <>
-    <Header/>
+    <Navbar/>
     <div className='container-fluid'>
       <Link to="/Catogory"><button className='btn btn-primary mt-3'>Back</button></Link>
       <div className="row">

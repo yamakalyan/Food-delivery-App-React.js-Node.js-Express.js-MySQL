@@ -13,7 +13,7 @@ address.get("/", (req, res)=>{
 });
 
 // creating address 
-address.post("/create", (req, res)=>{
+address.post("/create/", (req, res)=>{
     try {
         const addressId = Math.floor(1000000 + Math.random() * 9999999);
         const parAdress = req.body.permanant_address;

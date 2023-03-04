@@ -43,8 +43,46 @@ food.get("/search/", (req, res)=>{
     }
 });
 
+// getting unique food
+food.get('/:food_id', (req, res)=>{
+    try {
+        const id = req.params.food_id;
+
+        const sql = `SELECT * FROM food_items WHERE food_id = '${id}' AND food_ifdeleted = '0'`;
+
+        database.query(sql, (err, results)=>{
+            if (err) {
+                res.status(400).json({
+                    server : false,
+                    message : 'sql error',
+                    err
+                })
+            } else {
+                if (results.length != 0) {
+                    res.status(200).json({
+                        server : true,
+                        mesage : 'item found succesfully',
+                        results
+                    })
+                } else {
+                    res.status(400).json({
+                        server :false,
+                        message : 'item not found'
+                    })
+                }
+            }
+        })
+    } catch (error) {
+        res.status(500).json({
+            server : false,
+            message : 'invalid info',
+            error 
+        })
+    }
+})
+
 // getting list of foods
-food.get("/items/", (req, res)=>{
+food.get("/food/items/", (req, res)=>{
     try {
         const sql = `SELECT * FROM food_items WHERE food_ifdeleted = '0'`;
 
@@ -92,7 +130,7 @@ const internalstorage = multer.diskStorage({
     }
 })
  var upload = multer({storage : internalstorage})
-food.post("/create", upload.single("chicken"), (req, res)=>{
+food.post("/create", upload.single("sambar"), (req, res)=>{
     try {
         const id = Math.floor(10000000 * Math.random() + 9999999);
         const name = req.body.food_name;
@@ -191,7 +229,7 @@ food.put("/update/", (req, res)=>{
 });
 
 // deleting food item
-food.delete("/remove/:food_id", (req, res)=>{
+food.delete("/delete/:food_id", (req, res)=>{
     try {
         let id = req.params.food_id;
 
