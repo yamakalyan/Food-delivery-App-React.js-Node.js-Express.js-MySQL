@@ -5,3 +5,26 @@
     justify-content: center;
     align-items: center;
 }
+
+.navError{
+    height: 70px;
+    width: 100%;
+    border-color: 5px black;
+    background-color: rgb(165, 8, 8);
+}
+.error{
+    font-size: 35px;
+    font-weight: bold;
+    color: white;
+    align-items: center;
+    margin-left: 10px;
+}
+.found{
+    font-size: 70px;
+    color:  red;
+
+}
+.textError{
+    font-size: 50px;
+    color: rgb(57, 50, 50);
+}

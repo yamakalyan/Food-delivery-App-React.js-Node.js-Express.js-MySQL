@@ -6,39 +6,55 @@ import Header from '../Header';
 
 function SeaFood() {
 const navigator = useNavigate();
+const token = localStorage.getItem('token')
 const [readFetcheddata, setreadFetcheddata] =useState([]);
 
 useEffect(()=>{
-  const fetchingApidata = async()=>{
-    await fetch('http://localhost:3120/food/food/items/')
-    .then(res => res.json())
-    .then(data => {
-      if (data.server === true) {
-        setreadFetcheddata(data.results)
-      } else {
-        setreadFetcheddata(data.results)
-      }
-    })
-  }
-  fetchingApidata()
+    
+    const fetchingApidata = ()=>{
+       fetch('http://localhost:3120/food/food/items/')
+      .then(res => res.json())
+      .then(data => {
+        if (data.server === true) {
+          setreadFetcheddata(data.results)
+        } else {
+          setreadFetcheddata(data.results)
+        }
+      })
+
+    }
+   return ()=> fetchingApidata()
 }, [])
 
-
-const viewFetcheddata = readFetcheddata.map((food, m)=>{
+let filtering = readFetcheddata.filter((f)=>f.food_type === 'seafood')
+const viewFetcheddata = filtering.map((food, m)=>{
   return(
-    <>
       <div className="col-2 m-3 p-3 shadow rounded" key={m}>
     <img src="/17.jpg" className='img-fluid' alt="" /><br /> 
     <h4 className='text-center'> {food.food_name} </h4>
-    <small className='text-center'>{food.food_type}</small><hr />
+    <small className='text-center'>Type : {food.food_type}</small><hr />
     <p className='text-center'>{food.food_description}</p>
     <div className='example'>
-    <h5 className='text'>Price : ₹{food.food_amount}</h5>
-    <button className='btn btn-primary' onClick={()=>navigator('/Login')}>Order</button>
-    <button className='btn btn-primary mr-2' onClick={()=>navigator('/Login')}><AiOutlineShoppingCart /></button>
+    <h5 className='text'>Price : ₹{food.food_amount}/-</h5>
+    <button className='btn btn-primary m-2' onClick={()=>navigator(`/SelectAddress/${food.food_id}`)}>Order</button>
+    <button className='btn btn-primary mr-2' onClick={()=>{
+              let options = {
+                  method : 'POST',
+                  headers : {'Content-Type' : 'application/json', 'kalyan_header_key' : token}
+              }
+      
+              fetch(`http://localhost:3120/cart/add/${food.food_id}`, options)
+              .then(response =>response.json())
+              .then(data =>{
+                  if (data.server) {
+                      alert('item added to cart')
+                  } else {
+                      navigator('/Cart')
+                  }
+              })
+    }}><AiOutlineShoppingCart /></button>
     </div>
       </div>
-    </>
   )
 })
   return (
@@ -46,7 +62,6 @@ const viewFetcheddata = readFetcheddata.map((food, m)=>{
     <Header/>
     {readFetcheddata ?  
     <div className='row'>
-
       {viewFetcheddata}
     </div>
     :

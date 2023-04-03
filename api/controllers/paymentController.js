@@ -1,9 +1,16 @@
 const express = require("express");
 const jwl = require("jsonwebtoken");
 const database = require("../configures/database")
+const crypto = require('crypto')
 const payments = express.Router();
+const Razorpay = require("razorpay");
 
-// home page of payments
+const instance = new Razorpay({
+    key_id : process.env.Razor_key_id,
+    key_secret : process.env.Razor_secret_key
+})
+
+// HOME PAGE OF PAYMENT
 payments.get("/", (req, res)=>{
     try {
         res.status(200).send("succesfully payment working")
@@ -13,113 +20,132 @@ payments.get("/", (req, res)=>{
     }
 });
 
-// for creating payment
-payments.post("/create/", (req, res)=>{
+// CREATE PAYMENT
+payments.post('/create', (req, res)=>{
     try {
-        const paymentId = Math.floor(1000000 + Math.random() * 99999999);
-        const userId = req.body.user_id	;
-        const orderId = req.body.order_id;
-        const paymentDetails = req.body.payment_details;
-        const totalAmount = req.body.total_amount;
-        const paymentStatus = req.body.payment_status;
-        const paymentIffailed = req.body.payment_iffailed;
+       const options = {
+        amount : req.body.amount * 100,
+        currency : req.body.currency,
+        receipt : Math.floor(100000 * Math.random() + 999999),
+        notes : {
+            order_id : req.body.order_id,
+            food_name : req.body.food_name
+        }
+       }
+       const headerkey = process.env.JWT_HEADER_KEY
+       const securekey = process.env.JWT_SECRET_KEY
+       const header = req.header(headerkey)
+       const verified = jwl.verify(header, securekey)
 
-        var securekeyhead = process.env.JWT_HEADER_KEY;
-        var securekey = process.env.JWT_SECRET_KEY;
+       if (verified) {
+        const userId = verified.user_id
+      instance.orders.create(options, (err, results)=>{
+        if (err) {
+            res.status(400).json({
+                server : false,
+                message : 'payment creation failed',
+                err
+            })
+        } else {
+            var creatingPayment = `INSERT INTO payments(razorpay_payment_id, razorpay_order_id, user_id, razorpay_signature, order_id, amount, payment_status)
+            VALUES ('','${results.id}', '${userId}', '', '${req.body.order_id}', '${results.amount /100}', '0')`
 
-        var headerKeymaking = req.header(securekeyhead);
-
-        const tokenVerifying = jwl.verify(headerKeymaking, securekey);
-
-        if (tokenVerifying) {
-
-        var paymentsql = `INSERT INTO payments(payment_id,user_id,order_id,payment_details,total_amount,payment_status,payment_iffailed)
-                    VALUES('${paymentId}','${userId}','${orderId}','${paymentDetails}','${totalAmount}','${paymentStatus}','${paymentIffailed}')`;
-
-            database.query(paymentsql, (err, results)=>{
+            database.query(creatingPayment, (err, paymentResults)=>{
                 if (err) {
                     res.status(400).json({
                         server : false,
-                        message : "failed to create payment",
+                        message : "payment created but not added to database",
+                        err
+                    })
+                } else {
+                    const sendingValues = {
+                        payorder_id : results.id,
+                        amount : results.amount,
+                        server : true
+                    }
+                    res.status(200).json({
+                        server : true,
+                        message : "payment created succesfully",
+                        sendingValues
+                    })
+                }
+            })
+        }
+      })
+              
+    } else {
+        res.json({
+            server : false,
+            message : 'token verify failed'
+        })  
+    }
+    } catch (error) {
+        res.json({
+            server : false,
+            error
+        })
+    }
+})
+
+payments.put('/success/verify', (req, res)=>{
+    try {
+        const orderIdofFood = req.body.order_food_id;
+        const razorpay_order_id = req.body.order_id;
+        const razorpay_payment_id = req.body.razorpay_payment_id
+        const razorpay_signiture = req.headers['x-razorpay-signature']
+        
+        const hmc = crypto.createHmac('sha256', process.env.Razor_secret_key);
+        hmc.update( razorpay_order_id + '|' + razorpay_payment_id);
+        const generated_signature = hmc.digest('hex');
+
+        if (razorpay_signiture === generated_signature) {
+
+    const updateQuery = `UPDATE payments SET razorpay_signature='${razorpay_signiture}', razorpay_payment_id ='${razorpay_payment_id}', payment_status='1' WHERE razorpay_order_id = '${razorpay_order_id}'`
+    database.query(updateQuery, (err, results)=>{
+        if (err) {
+            res.status(400).json({
+                server :false,
+                message : "verified but not added to database",
+                err
+            })
+        } else {
+            const updateQuery = `UPDATE user_orders SET order_status= '1' WHERE order_id='${orderIdofFood}'`
+            database.query(updateQuery, (err, updateResults)=>{
+                if (err) {
+                    res.status(400).json({
+                        server : false,
+                        message : 'failed to update status',
                         err
                     })
                 } else {
                     res.status(200).json({
                         server : true,
-                        message : "payment succesfully created",
-                        results
+                        message : "succesfully verified details",
+                        results,
+                        updateResults
+                        
                     })
                 }
             })
-        } else {
-            res.status(400).json({
-                server : false,
-              msg : "failed to create a payment"
-            })  
-          }
+        }
+    })
 
+        }else{
+            res.json({
+                server : false,
+                message :'payment failude'
+            })
+        }
     } catch (error) {
         res.status(500).json({
             server : false,
-            message : "invalid details",
             error
         })
     }
-});
+})
 
-// for deleting payment
-payments.delete("/delete/:payment_id", (req, res)=>{
-    try {
-        const id = req.params.payment_id;
 
-        const sql = `SELECT * FROM payments WHERE payment_id = '${id}'`;
-
-        database.query(sql, (error, results)=>{
-            if (error) {
-                res.status(400).json({
-                    server: false,
-                    message : "payment failed to delete",
-                    error
-                })
-            } else {
-            
-                if(results.length === 0){
-                    res.status(400).json({
-                        server : false,
-                        message : "payment not found",
-                    
-                    })
-                }
-                else{
-                    const deleteSql = `DELETE FROM payments WHERE payment_id = '${id}'`;
-
-                    database.query(deleteSql, (err, results)=>{
-                        if (err) {
-                            res.status(400).json({
-                                server : false,
-                                message : "payment not deleted",
-                                err
-                            })
-                        } else {
-                            res.status(200).json({
-                                server : true,
-                                message : "payment deleted succesfully"
-                            })
-                        }
-                    })
-                }
-            }
-        })
-    } catch (error) {
-        res.status(500).json({
-            server : false,
-            message : "invalid details entered",
-            error 
-        })
-    }
-});
-
-// getting payment details like order details/food details/address details/user details
+// GETTING WHOLE DETAILS WITH PAYMENT ID
 payments.get("/details/:payment_id", (req, res)=>{
     try {
         const paymentId = req.params.payment_id

@@ -6,7 +6,7 @@ const food = express.Router();
 
 const multer = require("multer");
 
-// seraching food 
+// FOOD SEARCH
 food.get("/search/", (req, res)=>{
     try {
         const search = req.query.text
@@ -43,7 +43,7 @@ food.get("/search/", (req, res)=>{
     }
 });
 
-// getting unique food
+// GET UNIQUE FOOD ITEM
 food.get('/:food_id', (req, res)=>{
     try {
         const id = req.params.food_id;
@@ -62,7 +62,7 @@ food.get('/:food_id', (req, res)=>{
                     res.status(200).json({
                         server : true,
                         mesage : 'item found succesfully',
-                        results
+                        food : results
                     })
                 } else {
                     res.status(400).json({
@@ -81,7 +81,7 @@ food.get('/:food_id', (req, res)=>{
     }
 })
 
-// getting list of foods
+// GET WHOLE FOOD ITEMS LIST
 food.get("/food/items/", (req, res)=>{
     try {
         const sql = `SELECT * FROM food_items WHERE food_ifdeleted = '0'`;
@@ -120,7 +120,7 @@ food.get("/food/items/", (req, res)=>{
     }
 });
 
-// creating food item with image
+// CREATING FOOD ITEM WITH IMAGE
 const internalstorage = multer.diskStorage({
     destination : function (err, file, cb){
         cb(null, "./pictures")
@@ -130,7 +130,7 @@ const internalstorage = multer.diskStorage({
     }
 })
  var upload = multer({storage : internalstorage})
-food.post("/create", upload.single("sambar"), (req, res)=>{
+food.post("/create", upload.single("puff"), (req, res)=>{
     try {
         const id = Math.floor(10000000 * Math.random() + 9999999);
         const name = req.body.food_name;
@@ -170,7 +170,7 @@ food.post("/create", upload.single("sambar"), (req, res)=>{
     }
 });
 
-// updating food item 
+// UPDATE FOOD ITEM
 food.put("/update/", (req, res)=>{
     try {
         const id = req.body.food_id;
@@ -228,7 +228,7 @@ food.put("/update/", (req, res)=>{
     }
 });
 
-// deleting food item
+// DELETE FOOD ITEM
 food.delete("/delete/:food_id", (req, res)=>{
     try {
         let id = req.params.food_id;

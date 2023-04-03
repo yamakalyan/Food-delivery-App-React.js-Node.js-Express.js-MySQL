@@ -6,7 +6,7 @@ const Contact = () => {
     <>
       <Header />
       <div className="container ">
-        <section className="mb-4 m-5">
+        <section id="contact" className="mb-4 m-5">
           <h2 className="h1-responsive font-weight-bold text-center my-4">
             Contact us
           </h2>
@@ -17,28 +17,28 @@ const Contact = () => {
           </p>
 
           {/* first name and second name */}
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">First and last name</span>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <span className="input-group-text">Name and Mobile</span>
             </div>
-            <input type="text" aria-label="First name" class="form-control"/>
-            <input type="text" aria-label="Last name" class="form-control"/>
+            <input type="text" aria-label="Name" className="form-control"/>
+            <input type="text" aria-label="Mobile" className="form-control"/>
           </div> <br/>
           {/* username input */}
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">@</span>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="basic-addon1">@</span>
             </div>
-            <input type="text" class="form-control" placeholder="@email" aria-label="@email" aria-describedby="basic-addon1"/>
+            <input type="text" className="form-control" placeholder="@email" aria-label="@email" aria-describedby="basic-addon1"/>
           </div>
         {/* text area */}
-                  <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">With textarea</span>
+                  <div className="input-group">
+          <div className="input-group-prepend">
+            <span className="input-group-text">Message</span>
           </div>
-          <textarea class="form-control" aria-label="With textarea"></textarea>
+          <textarea className="form-control" aria-label="With textarea"></textarea>
         </div> <br/>
-        <button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
+        <button type="button" className="btn btn-primary btn-lg btn-block">Submit</button>
         </section>
       </div>
       </>
