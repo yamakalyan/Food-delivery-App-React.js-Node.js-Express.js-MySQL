@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../Header";
 import { IoReloadOutline } from 'react-icons/io5'
 import { useNavigate } from "react-router-dom";
+import About from "../../About";
 
 const Orders =()=>{
   const navigator = useNavigate()
@@ -60,6 +61,7 @@ const mapping = loadOrders?.map((order, or)=>{
       </>
 }
     </div>
+    <About/>
     </>
   )
 }

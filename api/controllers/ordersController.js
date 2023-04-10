@@ -113,7 +113,7 @@ orders.post("/create", (req, res)=>{
     }
 });
 
-// GETTING WHOLE DETAILS WITH USER ID
+// GETTING WHOLE ORDERING DETAILS WITH USER ID
 orders.get("/orderdetails", (req, res)=>{
     try {
         const headerKEy = process.env.JWT_HEADER_KEY;
@@ -152,9 +152,10 @@ orders.get("/orderdetails", (req, res)=>{
             })
         }
 
-            const TotalAmount = async(amount, quantity)=>{
+            const TotalAmount = async(amount, foodId, quantityId)=>{
                 return new Promise((resolve, reject)=>{
-                    const totalSql = `SELECT SUM(order_quantity * '${amount}' + tax + charges) as Total FROM user_orders  WHERE food_id ='${quantity}'`
+                    const totalSql = `SELECT SUM(order_quantity * '${amount}' + tax + charges) as Total FROM user_orders
+                      WHERE food_id= '${foodId}' AND order_status='0' `
                     database.query(totalSql, (err, Total)=>{
                         if (err) {
                             reject(err)
@@ -183,8 +184,8 @@ orders.get("/orderdetails", (req, res)=>{
                     orderResults[i].food = await foodDetails(fromresultgettingFooddetails)
                     orderResults[i].address = await addressDetails(fromresultgettingAddressdetails)
                     const amount = orderResults[i].food[0].food_amount
-                    const quantity = orderResults[i].food_id
-                    orderResults[i].Total = await TotalAmount(amount, quantity)
+                    const foodId = orderResults[i].food_id
+                    orderResults[i].Total = await TotalAmount(amount, foodId)
                 }
                 res.status(200).json({
                     server :true,
@@ -208,7 +209,7 @@ orders.get("/orderdetails", (req, res)=>{
     }
 });
 
-// GETTING THE WHOLE DETAILS OF USER ORDERED FOOD
+// GETTING THE WHOLE SUCCESS ORDERS OF USER ORDERED FOOD
 orders.get("/orderlist", (req, res)=>{
     try {
 
@@ -248,7 +249,7 @@ orders.get("/orderlist", (req, res)=>{
                 })
             }
 
-            let listQuerrysql = `SELECT * FROM user_orders WHERE user_id ='${userId}' AND order_ifdeleted ='0'`;
+            let listQuerrysql = `SELECT * FROM user_orders WHERE user_id ='${userId}' AND order_status ='1'`;
     
             db.query(listQuerrysql, async (err, results)=>{
                 if (err) {

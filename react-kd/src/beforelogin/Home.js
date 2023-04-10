@@ -2,16 +2,19 @@ import React from "react";
 import { Link } from "react-router-dom";
 import '../beforelogin/Exampl.css'
 import Navbar from "./Navbar";
+import About from "../About.jsx";
+
 
 const Home =()=>{
 
   return(
     <>
     <Navbar/>
-    <div className="container-fluid position-relative">
+    <div className="container-fluid">
+
      <div className="container">
-          <div className="row">  
-          <div className="col m-5">
+          <div className="row m-3">  
+          <div className="col">
           <div id="carouselExampleIndicators" className="carousel slide shadow" data-ride="carousel">
           <ol className="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
@@ -57,68 +60,74 @@ const Home =()=>{
           </div>
           </div>
 
-          <div className="container-fluid m-5">  
-          <div className="row">
-          <div className="col-2 bg-danger rounded m-5 shadow">
+          <div className="row justify-content-md-center ">
+          <div className="col-sm-auto col-md-auto col-lg-3 bg-danger rounded m-4 shadow">
           <Link to="/" className=" text-dark">
-            <h1 className="p-2">Today's Special</h1><hr />
+            <h1 className="text-center">Today's Special</h1><hr />
             <img src="/19.jpg" className="img-fluid" alt="" />
-            <p>
+            <p className="text-dark dark-50">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quaerat reprehenderit, illo laborum error consequuntur sed facere illum quis asperiores reiciendis, quod omnis doloremque accusantium repudiandae. Dicta minus tempora numquam!
             </p>
           </Link>
           </div>
-          <div className="col-2 bg-danger m-5 rounded shadow">
+          <div className="col-sm-auto col-md-auto col-lg-3 bg-danger rounded m-4 shadow">
+          <Link to="/" className=" text-dark">
+            <h1 className="text-center">Today's Special</h1><hr />
+            <img src="/19.jpg" className="img-fluid" alt="" />
+            <p className="text-dark dark-50">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quaerat reprehenderit, illo laborum error consequuntur sed facere illum quis asperiores reiciendis, quod omnis doloremque accusantium repudiandae. Dicta minus tempora numquam!
+            </p>
+          </Link>
+          </div>
+          <div className="col-sm-auto col-md-auto col-lg-3 bg-danger m-4 rounded shadow">
             <Link className=" text-dark">  
-          <h1 className="p-2">Offer's Buy One + Get One</h1><hr />
+          <h1 className="text-center">Offer's Buy 1 + Get 1</h1><hr />
             <img src="/22.jpg"className="img-fluid" alt="" />
-            <p>
+            <p className="text-dark dark-50">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quaerat reprehenderit, illo laborum error consequuntur sed facere illum quis asperiores reiciendis, quod omnis doloremque accusantium repudiandae. Dicta minus tempora numquam!
             </p>
             </Link>
         </div>
           </div>
-      </div>
 
-      <div className="container-fluid m-5">
         <div className="row m-5">
-          <div className="col-6">
+          <div className="col-sm-4 col-md-4 col-lg-4 m-auto">
         <img className="img-fluid shadow rounded" src="/50.2.jpg"  alt=""/>
           </div>
-          <div className="col-4">
-      <h1 className="veg-align text-primary">Eat healthy stay healthy</h1><hr/>
-        <p className="para-quote">Vegetarian food leaves a deep impression on our nature. If the whole world adopts 
+          <div className="col-sm-4 col-md-4 col-lg-4 m-auto">
+      <h1 className="text-uppercase text-primary">Eat healthy stay healthy</h1><hr/>
+        <p className="text-dark dark-50">Vegetarian food leaves a deep impression on our nature. If the whole world adopts 
         vegetarianism, it can change the destiny of humankind.</p>
         </div>
         </div>
-      </div>
 
-      <div className="container-fluid row m-5 rounded">
-      <div className="col-4 ">
-        <h1 className="text-align text-primary">Get food faster then you expect</h1><hr/>
+      <div className="row">
+      <div className="col-sm-4 col-md-4 col-lg-4 m-5">
+        <h1 className="text-primary text-center text-uppercase">Get food faster then you expect</h1><hr/>
         <ul>
-          <li><p className="para-align ">Avoid the lines and have groceries delivered by us.</p></li>
-          <li> <p className="para-align ">Call us and we'll be there.</p></li>
-          <li> <p className="para-align ">Delivered with love.</p></li>
-          <li> <p className="para-align "> Delivering happiness.</p></li>
-          <li> <p className="para-align ">Delivering happiness to your home.</p></li>
-          <li> <p className="para-align ">Delivering satisfaction every day.</p></li>
-          <li> <p className="para-align ">Dial now for good food.</p></li>
-          <li> <p className="para-align ">Don't starve, just order.</p></li>
+          <li><p className="text-dark dark-50">Avoid the lines and have groceries delivered by us.</p></li>
+          <li> <p className="text-dark dark-50">Call us and we'll be there.</p></li>
+          <li> <p className="text-dark dark-50">Delivered with love.</p></li>
+          <li> <p className="text-dark dark-50"> Delivering happiness.</p></li>
+          <li> <p className="text-dark dark-50">Delivering happiness to your home.</p></li>
+          <li> <p className="text-dark dark-50">Delivering satisfaction every day.</p></li>
+          <li> <p className="text-dark dark-50">Dial now for good food.</p></li>
+          <li> <p className="text-dark dark-50">Don't starve, just order.</p></li>
         </ul>
       </div>
-      <div className="col-6 ">
+      <div className="col-sm-4 col-md-4 col-lg-6 m-auto">
           <img src="vehicle.1.jpg" className="img-fluid shadow rounded" alt=""/>
-          </div>
-        </div>
+      </div>
+      </div>
 
-        <div className="container text-center">
-          <h1 className="logo">Kwality <br/> Delivery</h1>
+      <div className="row">
+        <div className="col-sm-12 col-lg-12 col-md-12 m-auto">
+          {/* <h1 className="logo text-center">Kwality <br/> Delivery</h1> */}
         </div>
-        <div className="container text-center mt-5">
-          <p>Copyright @ {(new Date().getFullYear())}</p>
-        </div>
+      </div>
+          <p className="text-center text-dark dark-50 m-5">Copyright @ {(new Date().getFullYear())}</p>
 </div>
+<About/>
     </>
   )
 }

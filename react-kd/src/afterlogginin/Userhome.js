@@ -1,27 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import '../beforelogin/Exampl.css';
+import '../afterlogginin/login.css'
 import Header from '../afterlogginin/Header'
+import About from "../About";
 
 const Userhome =()=>{
 
   return(
     <>
     <Header />
-    <div className="container-fluid position-relative">
-    {/* <svg class="w-full h-full position-absolute" viewBox="0 0 8000 8000">
-      <defs>
-        <pattern id="bg_pattern" width="100" height="100" patternUnits="userSpaceOnUse">
-        <line x1="0" y1="0" x2="10" y2="10" stroke="#3b3d93" stroke-width="6" stroke-linecap="round" opacity="1"></line>
-        <line x1="90" y1="90" x2="100" y2="100" stroke="#3b3d93" stroke-width="6" stroke-linecap="round" opacity="1"></line> 
-        <line x1="10" y1="90" x2="0" y2="100" stroke="#3b3d93" stroke-width="6" stroke-linecap="round" opacity="1"></line> 
-        <line x1="90" y1="10" x2="100" y2="0" stroke="#3b3d93" stroke-width="6" stroke-linecap="round" opacity="1"></line> 
-        <line x1="40" y1="40" x2="60" y2="60" stroke="#3b3d93" stroke-width="6" stroke-linecap="round" opacity="1"></line> 
-        <line x1="60" y1="40" x2="40" y2="60" stroke="#3b3d93" stroke-width="6" stroke-linecap="round" opacity="1"></line>
-        </pattern>
-        </defs><rect x="0" y="0" width="100%" height="100%" fill="#1d1d1e" opacity="1"></rect>
-        <rect x="0" y="0" width="100%" height="100%" fill="url(#bg_pattern)" opacity="1"></rect>
-        </svg> */}
+    <div className="container">
+
      <div className="container">
           <div className="row">  
           <div className="col m-5">
@@ -70,79 +59,68 @@ const Userhome =()=>{
         </div>
           </div>
           </div>
-          </div>
+          </div> 
 
-          <div className="container-fluid m-5">  
-          <div className="row ">
-          <div className="col-3 rounded m-5 shadow">
+          <div className="row">
+          <div className="shadow col-sm-auto col-md-auto col-lg-3 m-2">
           <Link to="/" className="nav-link">
-            <h2 className="p-2">Today's Special</h2><hr />
+            <h2>Today's Special</h2><hr />
             <img src="/19.jpg" className="img-fluid" alt="" />
-            <p>
+            <p className="text-center text-dark dark-50">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quaerat reprehenderit
             </p>
           </Link>
           </div>
-          <div className="col-3 m-5 rounded shadow">
-            <Link className="nav-link">  
-          <h2 className="p-2">Offer! 0rder 1 + 1</h2><hr />
-            <img src="/22.jpg"className="img-fluid" alt="" />
-            <p>
+          <div className="shadow col-sm-auto col-md-auto col-lg-3 m-2">
+          <Link to="/" className="nav-link">
+            <h2>Today's Special</h2><hr />
+            <img src="/19.jpg" className="img-fluid" alt="" />
+            <p className="text-center text-dark dark-50">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quaerat reprehenderit
             </p>
-            </Link>
-        </div>
-          <div className="col-3 m-5 rounded shadow">
-            <Link className="nav-link">  
-          <h2 className="p-2">Offer! 0rder 1 + 1</h2><hr />
-            <img src="/22.jpg"className="img-fluid" alt="" />
-            <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quaerat reprehenderit
-            </p>
-            </Link>
-        </div>
+          </Link>
           </div>
-      </div>
+          <div className="shadow col-sm-auto col-md-auto col-lg-3 m-2">
+          <Link to="/" className="nav-link">
+            <h2>Today's Special</h2><hr />
+            <img src="/19.jpg" className="img-fluid" alt="" />
+            <p className="text-center text-dark dark-50">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus quaerat reprehenderit
+            </p>
+          </Link>
+          </div>
+          </div>
 
-      <div className="container-fluid m-5">
-        <div className="row m-5">
-          <div className="col-6">
+        <div className="row m-3">
+          <div className="col-sm-6 col-md-6 col-lg-5 m-2">
         <img className="img-fluid shadow rounded" src="/50.2.jpg"  alt=""/>
           </div>
-          <div className="col-4">
-      <h1 className="veg-align text-primary">Eat healthy stay healthy</h1><hr/>
-        <p className="para-quote">Vegetarian food leaves a deep impression on our nature. If the whole world adopts 
+          <div className="col-sm-4 col-md-4 col-lg-5 m-2">
+      <h1 className="text-primary">Eat healthy stay healthy</h1><hr/>
+        <p className=" text-dark dark-50">Vegetarian food leaves a deep impression on our nature. If the whole world adopts 
         vegetarianism, it can change the destiny of humankind.</p>
         </div>
         </div>
-      </div>
 
-      <div className="container-fluid row m-5 rounded">
-      <div className="col-4 ">
-        <h1 className="text-align text-primary">Get food faster then you expect</h1><hr/>
-        <ul>
-          <li><p className="para-align ">Avoid the lines and have groceries delivered by us.</p></li>
-          <li> <p className="para-align ">Call us and we'll be there.</p></li>
-          <li> <p className="para-align ">Delivered with love.</p></li>
-          <li> <p className="para-align "> Delivering happiness.</p></li>
-          <li> <p className="para-align ">Delivering happiness to your home.</p></li>
-          <li> <p className="para-align ">Delivering satisfaction every day.</p></li>
-          <li> <p className="para-align ">Dial now for good food.</p></li>
-          <li> <p className="para-align ">Don't starve, just order.</p></li>
-        </ul>
+      <div className="row m-3">
+      <div className="col-sm-4 col-md-4 col-lg-5 m-2">
+        <h1 className="text-primary">Get food faster then you expect</h1><hr/>
+
+         <p className="text-dark dark-50">Avoid the lines and have groceries delivered by us.</p>
+          <p className="text-dark dark-50">Call us and we'll be there.</p>
+          <p className="text-dark dark-50">Delivered with love.</p>
+          <p className="text-dark dark-50"> Delivering happiness.</p>
+          <p className="text-dark dark-50">Delivering happiness to your home.</p>
+          <p className="text-dark dark-50">Delivering satisfaction every day.</p>
+          <p className="text-dark dark-50">Dial now for good food.</p>
+          <p className="text-dark dark-50">Don't starve, just order.</p>
       </div>
-      <div className="col-6 ">
+      <div className="col-sm-4 col-md-4 col-lg-5 m-2">
           <img src="vehicle.1.jpg" className="img-fluid shadow rounded" alt=""/>
           </div>
         </div>
-
-        <div className="container text-center">
-          <h1 className="logo">Kwality <br/> Delivery</h1>
-        </div>
-        <div className="container text-center mt-5">
-          <p>Copyright @ {(new Date().getFullYear())}</p>
-        </div>
 </div>
+<About/>
     </>
   )
 }

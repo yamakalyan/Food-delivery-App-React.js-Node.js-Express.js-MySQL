@@ -140,28 +140,33 @@ if (verifyPayment) {
 
   const mapping = orderDetails?.map((order, o)=>{
     return(
-      <div key={o}>
+      <div className='row m-5 shadow' key={o}>
+        <div className='col-md col-sm col-lg px-3 py-3'>
          <h6>Food Name : {order.food[0].food_name} <span className='float-right'></span> </h6>
           <h6>Food Quantity : 1<span className='float-right'>Food Amount : {order.food[0].food_amount}</span> </h6>
           <h6>Address : {order.address[0].permanant_address} </h6>
           <h6>Food Quantity : {order.order_quantity}<span className='float-right'>Tax : CGST + SGST : {order.tax} rs</span> </h6>
-          <h6><span className='float-right'>Charges : {order.charges} rs</span> </h6>
-          <h4 className='text-center p-3 m-3'>Total Amount : {order.Total[0].Total}
-          <button className='btn btn-success float-right' onClick={()=>handlePaymentCreation(order.order_id, order.Total[0].Total )}>Pay</button>
-          </h4>
+          <h6><span className='float-right'>Charges : {order.charges} rs</span> </h6><br/>
+          <h4 className='text-center border border-dark p-3 mx-3 my-3'>Total Amount : {order.food[0].food_amount * order.order_quantity + order.tax + order.charges }
+         <button className='btn-sm btn-success float-right' onClick={()=>handlePaymentCreation
+          (order.order_id, order.food[0].food_amount * order.order_quantity + order.tax + order.charges )
+        }>Confirm and Pay</button>
+        </h4>
       </div>
+        </div>
     )
   })
   return (
     <>
     <Header/>
     <div className='container'>
-      <div className='row border border-dark m-5'>
-        <div className='col-md col-sm col-lg p-3'>
-          <h1 className='text-success text-center'>Confirm And Pay</h1><hr/>
+          <h1 className='text-success text-center'>Ordering Details</h1><hr/>
          {mapping}
-        </div>
-      </div>
+         {/* <h4 className='text-center p-3 m-3'>Total Amount : {orderDetails[0]?.Total[0].Total}
+         <button className='btn btn-success float-right' onClick={()=>handlePaymentCreation
+          (orderDetails[0]?.order_id, orderDetails[0]?.Total[0].Total )
+        }>Pay</button>
+        </h4> */}
     </div>
     </>
   )

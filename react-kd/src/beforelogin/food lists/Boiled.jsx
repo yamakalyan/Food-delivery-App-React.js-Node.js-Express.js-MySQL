@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import {  useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar';
+import About from '../../About';
 
 function Boiled() {
   const [viewFood, setViewFood] =useState([])
@@ -22,15 +23,17 @@ function Boiled() {
   let filtering = viewFood.filter((f)=>f.food_type === 'seafood')
   let mapping = filtering.map((food, a)=>{
     return(
-      <div className="col-2 m-3 p-3 shadow rounded" key={a}>
+      <div className="col-lg-2 mx-3 my-3 p-3 shadow rounded" key={a}>
     <img src="/17.jpg" className='img-fluid' alt="" /><br /> 
     <h4 className='text-center'> {food.food_name} </h4>
     <small className='text-center'>{food.food_type}</small><hr />
     <p className='text-center'>{food.food_description}</p>
     <div className='example'>
     <h5 className='text'>Price : ₹{food.food_amount}/-</h5>
-    <button className='btn btn-primary' onClick={()=>navigator('/Login')}>Order</button>
-    <button className='btn btn-primary mr-2' onClick={()=>navigator('/Login')}><AiOutlineShoppingCart /></button>
+    <div>
+    <button className='btn-sm btn-primary mx-1' onClick={()=>navigator('/Login')}>Order</button>
+    <button className='btn-sm btn-primary' onClick={()=>navigator('/Login')}><AiOutlineShoppingCart /></button>
+    </div>
     </div>
       </div>
     )
@@ -39,7 +42,7 @@ function Boiled() {
     <>
     <Navbar/>
     <div className='container-fluid'>
-      <div className="row">
+      <div className="row m-3">
     {viewFood ? mapping
     :
     <div className="container">
@@ -52,6 +55,7 @@ function Boiled() {
     }
       </div>
     </div>
+    <About/>
     </>
   )
 }

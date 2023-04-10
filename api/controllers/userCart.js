@@ -359,7 +359,7 @@ cart.put('/minus/:foodId', (req, res)=>{
                 } else {
                     const takeQuantity = results[0].cart_quantity
 
-                    if (takeQuantity >= 1) {
+                    if (takeQuantity === 1) {
 
                         let sql = `DELETE FROM user_cart WHERE user_id = '${userid}'AND cart_food_id = '${cartAdded}'`;
 
@@ -372,13 +372,14 @@ cart.put('/minus/:foodId', (req, res)=>{
                             } else {
                                 res.json({
                                     server : true,
-                                    message : 'item moved for payment'
+                                    message : 'item removed'
                                 })              
                             }
                         })
                     } else {
                         
                     const add = takeQuantity - 1
+
                     const quantitySql = `UPDATE user_cart SET cart_quantity = '${add}' 
                         WHERE user_id = '${userid}' AND cart_food_id ='${cartAdded}'`
     

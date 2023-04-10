@@ -5,6 +5,7 @@ import { MdDeleteForever} from 'react-icons/md'
 import '../login.css'
 import { RiSubtractFill } from 'react-icons/ri'
 import { AiOutlinePlus } from 'react-icons/ai'
+import About from "../../About";
 
 const Cart =()=>{
   const navigator = useNavigate()
@@ -39,7 +40,7 @@ const Cart =()=>{
 
       var mapping = showCartItem?.map((cart, c)=>{
         return(
-       <div className="col-12 border p-3 border-dark m-3" key={c}>
+       <div className="col-sm-12 border p-3 border-dark m-3" key={c}>
          <div className="">
         <h2>{cart.foodDetails[0].food_name}<span className="float-right">
           <button className='btn btn-outline-danger float-right' onClick={()=>{
@@ -59,18 +60,7 @@ const Cart =()=>{
         <p className="float-left">{cart.foodDetails[0].food_description}</p>
         <div className="cartQuantity-input">
           <p>
-        <button className="plus" onClick={()=>{
-          window.location.reload(false)
-          let options = {
-            method : 'PUT',
-            headers : {'Content-Type' : 'application/json', 'kalyan_header_key' : token}
-            }
-            fetch(`http://localhost:3120/cart/quantity/${cart.cart_food_id}`, options)
-            .then(response =>response.json())
-            .then(data => data.server)}} >
-               <AiOutlinePlus/> </button>
-               <input className="cartInput " type="number" readOnly value={cart.cart_quantity}/>
-               <button className="minus" 
+          <button className="minus" 
                onClick={()=>{
                  window.location.reload(false)
                  let options = {
@@ -81,6 +71,18 @@ const Cart =()=>{
                   .then(response =>response.json())
                   .then(data => data.server)
                 }}><RiSubtractFill /></button>
+               <input className="cartInput " type="number" readOnly value={cart.cart_quantity}/>
+               
+                <button className="plus" onClick={()=>{
+          window.location.reload(false)
+          let options = {
+            method : 'PUT',
+            headers : {'Content-Type' : 'application/json', 'kalyan_header_key' : token}
+            }
+            fetch(`http://localhost:3120/cart/quantity/${cart.cart_food_id}`, options)
+            .then(response =>response.json())
+            .then(data => data.server)}} >
+               <AiOutlinePlus/> </button>
           </p>
         </div>
         <h3> Total : {cart.total} </h3>
@@ -105,7 +107,7 @@ const Cart =()=>{
       <button className="move-address-button" onClick={()=>navigator(`/SelectAddressforCart`)}>Move to Address</button>
       </div>
     </section>
-    
+    <About/>
     </>
   )
 }

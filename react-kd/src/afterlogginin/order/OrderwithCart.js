@@ -79,8 +79,8 @@ function OrderwithCart() {
       .then(response =>response.json())
       .then(data =>{
         if (data.server) {
-            setGetOrderid(data.results.id)
-            setAmt(data.results.amount)
+            setGetOrderid(data.sendingValues.payorder_id)
+            setAmt(data.sendingValues.amount)
             paymentOptions()
         } else {
             alert("payment failed to create")

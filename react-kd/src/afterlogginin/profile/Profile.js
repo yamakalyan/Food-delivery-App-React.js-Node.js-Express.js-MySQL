@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header";
+import About from '../../About.jsx'
 
 function Profile() {
   const navigator = useNavigate()
@@ -58,13 +59,13 @@ function Profile() {
     <>
     <Header />
     <div className="container">
-      <div className="row m-5 shadow p-5">
+      <div className="row mt-5 shadow">
         {user ?
         <>
-        <div className="col-5 shadow">
+        <div className="col-md-5 shadow px-5 py-5">
             <img className="img-thumbnail" src={img} alt="user"/>
         </div>
-        <div className="col-5 m-5 p-5">
+        <div className="col-md-5 px-5 py-5">
           <h3 >Personal Details <hr/></h3>
           <h3 >Name : {profile[0].user_name}</h3>
           <h3 >Email : {profile[0].user_email} </h3>
@@ -78,6 +79,7 @@ function Profile() {
           }
       </div>
     </div>
+    <About/>
     </>
   )
 }

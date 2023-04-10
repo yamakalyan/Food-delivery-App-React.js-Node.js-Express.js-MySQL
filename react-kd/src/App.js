@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './beforelogin/Home.js';
 import Login from './beforelogin/Login';
 import Register from './beforelogin/Register';
-import About from './beforelogin/About.js';
+import About from './beforelogin/AboutSelf.js';
 import Item from './beforelogin/item.js';
 
 import Veg from './beforelogin/food lists/Veg';
@@ -37,6 +37,7 @@ import SuccessPage from './afterlogginin/order/SuccessPage.js';
 import OrderwithCart from './afterlogginin/order/OrderwithCart.js';
 import SelectAddressforCart from './afterlogginin/address/SelectAddressforCart.js';
 import Search from './Search.js';
+import Solo from './afterlogginin/items/Solo.js';
 
 const App=()=> {
   return (
@@ -98,6 +99,8 @@ const App=()=> {
       <Route path='/SeaFood' element={<Auth><SeaFood/></Auth>}></Route>
 
       <Route path='*' element={<Auth><PagenotFound/></Auth>}></Route>
+
+      <Route path='/solo/:name' element={<Solo/>}></Route>
   
   
       <Route path='/home' element={<Home/>}></Route>  

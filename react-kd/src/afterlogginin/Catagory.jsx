@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
+import About from "../About";
 
 const Catagory =()=>{ 
 const navigator = useNavigate();
@@ -46,6 +47,7 @@ const navigator = useNavigate();
          </div>
         </div>
 </div>
+<About/>
     </>
   )
   }

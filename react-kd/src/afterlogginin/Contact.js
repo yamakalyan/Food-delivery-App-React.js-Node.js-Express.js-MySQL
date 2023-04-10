@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-
+import About from '../About.jsx'
 const Contact = () => {
   return (
     <>
@@ -41,6 +41,7 @@ const Contact = () => {
         <button type="button" className="btn btn-primary btn-lg btn-block">Submit</button>
         </section>
       </div>
+      <About/>
       </>
     
   );

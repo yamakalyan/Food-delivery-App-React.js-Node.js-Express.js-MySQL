@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import About from "../About.jsx";
 
 const Login =()=>{
     let navigator = useNavigate();
@@ -75,6 +76,7 @@ const Login =()=>{
             </div>
             </div>
         </div>
+        <About/>
         </>
     )
 }

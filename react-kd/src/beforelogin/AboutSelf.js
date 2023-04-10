@@ -1,11 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
+import About from "../About.jsx";
 
-const About = () => {
-  let navigator = useNavigate();
-
-     
+const AboutSelf = () => {
   return (
     <>
     <Navbar/>
@@ -62,8 +59,9 @@ const About = () => {
 
       </div>
       </div>
+      <About/>
     </>
   )
 }
 
-export default About;
+export default AboutSelf;

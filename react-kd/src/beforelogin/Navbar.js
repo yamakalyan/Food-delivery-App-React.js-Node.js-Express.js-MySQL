@@ -31,7 +31,7 @@ const Navbar =()=>{
    }
     return(
         <>
-    <nav className={`navbar navbar-expand-lg border-bottom border-${btn} navbar-${bgColor} bg-${bgColor}`}>
+    <nav className={`navbar navbar-expand-lg border-bottom border-${btn} sticky-top navbar-${bgColor} bg-${bgColor}`}>
             <Link className="navbar-brand pl-5 font-weight-bold" to="/home">
             <img src="/20.jpg" width="40" height="40" className="d-inline-block align-top mr-3 rounded-circle" alt=""/>Kwality Delivery</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

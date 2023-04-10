@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Header from "../Header";
+import About from "../../About";
 
 function Update() {
 const token = localStorage.getItem('token')
@@ -100,6 +101,7 @@ const updateDetails =(e)=>{
       </div>  
       </form>
     </div>
+    <About/>
     </>
   )
 }

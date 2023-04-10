@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import Header from '../Header';
+import About from '../../About.jsx'
 
 
 function SeaFood() {
@@ -29,15 +30,16 @@ useEffect(()=>{
 let filtering = readFetcheddata.filter((f)=>f.food_type === 'seafood')
 const viewFetcheddata = filtering.map((food, m)=>{
   return(
-      <div className="col-2 m-3 p-3 shadow rounded" key={m}>
+      <div className="col-lg-2 col-md mx-3 my-3 p-3 shadow rounded" key={m}>
     <img src="/17.jpg" className='img-fluid' alt="" /><br /> 
     <h4 className='text-center'> {food.food_name} </h4>
     <small className='text-center'>Type : {food.food_type}</small><hr />
     <p className='text-center'>{food.food_description}</p>
     <div className='example'>
     <h5 className='text'>Price : ₹{food.food_amount}/-</h5>
-    <button className='btn btn-primary m-2' onClick={()=>navigator(`/SelectAddress/${food.food_id}`)}>Order</button>
-    <button className='btn btn-primary mr-2' onClick={()=>{
+    <div>
+    <button className='btn-sm btn-primary mx-1' onClick={()=>navigator(`/SelectAddress/${food.food_id}`)}>Order</button>
+    <button className='btn-sm btn-primary' onClick={()=>{
               let options = {
                   method : 'POST',
                   headers : {'Content-Type' : 'application/json', 'kalyan_header_key' : token}
@@ -53,6 +55,7 @@ const viewFetcheddata = filtering.map((food, m)=>{
                   }
               })
     }}><AiOutlineShoppingCart /></button>
+    </div>
     </div>
       </div>
   )
@@ -73,6 +76,7 @@ const viewFetcheddata = filtering.map((food, m)=>{
 </div>
     </div>
      } 
+     <About/>
     </>
   )
 }

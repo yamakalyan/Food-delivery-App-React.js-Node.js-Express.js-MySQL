@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
+import About from "../About.jsx";
 
 const Register = () => {
   // const navigator = useNavigate();
@@ -105,6 +106,7 @@ const Register = () => {
             </div>
             </div>
         </div>
+        <About/>
         </>
   )
 }

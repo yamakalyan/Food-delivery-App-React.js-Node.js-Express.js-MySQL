@@ -26,14 +26,14 @@ const searchInput =(e)=>{
   setSearchResult(e.target.value)
 }
 
-const searchBar =(e)=>{
-  e.preventDefault()
-  navigator(`/Search/${searchResult}`)
-
+const searchBar =()=>{
+ navigator(`/solo/${searchResult}`)
+  
 }
+
     return(
         <>
-         <nav className={`navbar navbar-expand-lg border-bottom border-dark navbar-${bgcolor} bg-${bgcolor}`}>
+         <nav className={`navbar navbar-expand-lg border-bottom border-dark sticky-top navbar-${bgcolor} bg-${bgcolor}`}>
          <Link className="navbar-brand pl-5 font-weight-bold" to="/">
         <img src="/20.jpg" width="40" height="40" className="d-inline-block align-top mr-3 rounded-circle" alt=""/>
          Kwality Delivery</Link>

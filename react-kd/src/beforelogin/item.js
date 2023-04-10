@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import About from "../About.jsx";
 
 const Item =()=>{ 
 const navigator = useNavigate();
@@ -56,6 +57,7 @@ const navigator = useNavigate();
          </div>
         </div>
 </div>
+<About/>
     </>
   )
   }

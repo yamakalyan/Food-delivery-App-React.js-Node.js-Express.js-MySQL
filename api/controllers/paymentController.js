@@ -144,13 +144,17 @@ payments.put('/success/verify', (req, res)=>{
     }
 })
 
-
 // GETTING WHOLE DETAILS WITH PAYMENT ID
-payments.get("/details/:payment_id", (req, res)=>{
+payments.get("/details", (req, res)=>{
     try {
-        const paymentId = req.params.payment_id
+        const headerKey = process.env.JWT_HEADER_KEY
+        const secureKey = process.env.JWT_SECRET_KEY
+        const header = req.header(headerKey)
+        const verified = jwl.verify(header, secureKey)
+        if (verified) {
+            const userID = verified.user_id
 
-        const checkingQuerry = `SELECT * FROM payments WHERE payment_id = '${paymentId}'`;
+        const checkingQuerry = `SELECT * FROM payments WHERE user_id = '${userID}'`;
 
         database.query(checkingQuerry, (error, paymentResult)=>{
             if (error) {
@@ -170,7 +174,7 @@ payments.get("/details/:payment_id", (req, res)=>{
                     
                    var takingPaymentdetails = paymentResult[0].order_id;
 
-                   const ordersQuerry = `SELECT * FROM user_orders WHERE order_id = '${takingPaymentdetails}'`;
+                   const ordersQuerry = `SELECT * FROM user_orders WHERE order_id = '${takingPaymentdetails}' AND order_status='0'`;
 
                    database.query(ordersQuerry, (err, orderResults)=>{
                     if (err) {
@@ -267,6 +271,12 @@ payments.get("/details/:payment_id", (req, res)=>{
                 }
             }
         })
+    } else {
+          res.status(400).json({
+            server : false,
+            message : "User not verified"
+          })  
+    }
     } catch (error) {
         res.status(500).json({
             server : false,
